@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AniMap | Hayvanlarla ilgili ihtiyaçlar tek platformda</title>
+  <meta name="description" content="AniMap; hayvan sahiplerini, hayvanseverleri, gönüllüleri ve hayvanlarla ilgili hizmet sağlayıcılarını sosyal akış, harita, sahiplendirme ve topluluk özellikleriyle bir araya getiren mobil uygulamadır.">
+  <meta name="theme-color" content="#c9272f">
+  <link rel="canonical" href="https://ozaneuysal-max.github.io/animap-legal-site/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="tr_TR">
+  <meta property="og:title" content="AniMap | Hayvanlarla ilgili ihtiyaçlar tek platformda">
+  <meta property="og:description" content="Hayvanlarla ilgili ihtiyaçları, toplulukları ve hizmetleri tek platformda bir araya getiren mobil uygulama.">
+  <meta property="og:url" content="https://ozaneuysal-max.github.io/animap-legal-site/">
+  <meta property="og:image" content="https://ozaneuysal-max.github.io/animap-legal-site/animap-logo.png">
+  <meta property="og:image:alt" content="AniMap logosu">
+
+  <style>
+    :root {
+      --background: #f6f8f6;
+      --surface: #ffffff;
+      --surface-soft: #edf4f0;
+      --ink: #142233;
+      --muted: #566475;
+      --brand: #c9272f;
+      --brand-dark: #9f1720;
+      --green: #2f705b;
+      --green-dark: #205342;
+      --border: #dce4df;
+      --shadow: 0 18px 50px rgba(20, 34, 51, 0.09);
+      --radius-large: 28px;
+      --radius-medium: 18px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--background);
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 100;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: var(--ink);
+      color: #ffffff;
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    a:focus-visible {
+      outline: 3px solid #174ea6;
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(1120px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      border-bottom: 1px solid rgba(20, 34, 51, 0.08);
+      background: rgba(255, 255, 255, 0.96);
+    }
+
+    .header-inner {
+      display: flex;
+      min-height: 78px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      font-size: 1.25rem;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .site-nav a {
+      color: var(--muted);
+      font-size: 0.94rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .site-nav a:hover {
+      color: var(--brand-dark);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .hero {
+      display: grid;
+      min-height: 620px;
+      min-height: 72svh;
+      grid-template-columns: minmax(0, 1.25fr) minmax(310px, 0.75fr);
+      align-items: center;
+      gap: clamp(36px, 7vw, 90px);
+      padding: clamp(72px, 10vw, 124px) 0;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin: 0 0 20px;
+      color: var(--green-dark);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      content: "";
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 18px;
+      font-size: clamp(3.3rem, 9vw, 6.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.075em;
+    }
+
+    .hero-subtitle {
+      max-width: 720px;
+      margin-bottom: 22px;
+      color: var(--ink);
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 750;
+      line-height: 1.35;
+      letter-spacing: -0.025em;
+    }
+
+    .hero-description {
+      max-width: 720px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 50px;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border: 2px solid transparent;
+      border-radius: 14px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button-primary {
+      background: var(--brand);
+      color: #ffffff;
+      box-shadow: 0 12px 28px rgba(159, 23, 32, 0.2);
+    }
+
+    .button-primary:hover {
+      background: var(--brand-dark);
+    }
+
+    .button-secondary {
+      border-color: #bcc8c1;
+      background: var(--surface);
+      color: var(--ink);
+    }
+
+    .button-secondary:hover {
+      border-color: var(--green);
+      color: var(--green-dark);
+    }
+
+    .hero-card {
+      position: relative;
+      padding: clamp(28px, 5vw, 46px);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
+    .hero-card::before {
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      top: -105px;
+      right: -80px;
+      border-radius: 50%;
+      background: rgba(201, 39, 47, 0.09);
+      content: "";
+    }
+
+    .hero-logo {
+      position: relative;
+      width: min(230px, 76%);
+      margin: 0 auto 26px;
+    }
+
+    .motto {
+      margin-bottom: 24px;
+      color: var(--ink);
+      font-size: 1.08rem;
+      font-weight: 800;
+    }
+
+    .topic-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .topic-list li {
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-soft);
+      color: var(--green-dark);
+      font-size: 0.86rem;
+      font-weight: 750;
+    }
+
+    .section {
+      padding: clamp(72px, 10vw, 112px) 0;
+    }
+
+    .section-white {
+      background: var(--surface);
+    }
+
+    .section-heading {
+      max-width: 720px;
+      margin-bottom: 42px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 14px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      min-height: 190px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background: var(--background);
+    }
+
+    .feature-number {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      border-radius: 13px;
+      background: #f9e8e9;
+      color: var(--brand-dark);
+      font-size: 0.86rem;
+      font-weight: 850;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 0;
+      font-size: 1.08rem;
+      line-height: 1.4;
+    }
+
+    .audience-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: clamp(34px, 7vw, 84px);
+      align-items: start;
+    }
+
+    .audience-intro h2 {
+      margin-bottom: 16px;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      line-height: 1.12;
+      letter-spacing: -0.05em;
+    }
+
+    .audience-intro p {
+      color: var(--muted);
+    }
+
+    .audience-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .audience-list li {
+      display: flex;
+      min-height: 64px;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: var(--surface);
+      color: var(--ink);
+      font-weight: 750;
+    }
+
+    .audience-list li::before {
+      flex: 0 0 auto;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--green);
+      content: "";
+    }
+
+    .contact-panel {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 28px;
+      padding: clamp(28px, 6vw, 54px);
+      border-radius: var(--radius-large);
+      background: var(--ink);
+      color: #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-panel h2 {
+      margin-bottom: 10px;
+      font-size: clamp(1.8rem, 4vw, 2.7rem);
+      line-height: 1.15;
+      letter-spacing: -0.04em;
+    }
+
+    .contact-panel p {
+      max-width: 650px;
+      margin-bottom: 0;
+      color: #cbd5df;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 20px;
+      border-radius: 14px;
+      background: #ffffff;
+      color: var(--ink);
+      font-weight: 850;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .contact-link:hover {
+      color: var(--brand-dark);
+    }
+
+    .site-footer {
+      padding: 34px 0 42px;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-copy {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px 20px;
+    }
+
+    .footer-links a {
+      color: var(--ink);
+      font-size: 0.9rem;
+      font-weight: 750;
+      text-underline-offset: 4px;
+    }
+
+    .footer-links a:hover {
+      color: var(--brand-dark);
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .audience-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .hero-card {
+        max-width: 520px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .contact-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-link {
+        justify-self: start;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1120px);
+      }
+
+      .header-inner {
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 14px 0;
+      }
+
+      .site-nav {
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+      }
+
+      .site-nav a {
+        font-size: 0.86rem;
+      }
+
+      .hero {
+        padding: 62px 0 76px;
+      }
+
+      h1 {
+        font-size: clamp(3.25rem, 19vw, 5rem);
+      }
+
+      .hero-card {
+        padding: 30px 20px;
+      }
+
+      .feature-grid,
+      .audience-list {
+        grid-template-columns: 1fr;
+      }
+
+      .feature-card {
+        min-height: 0;
+      }
+
+      .feature-number {
+        margin-bottom: 18px;
+      }
+
+      .contact-link {
+        width: 100%;
+        white-space: normal;
+        overflow-wrap: anywhere;
+        text-align: center;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Ana içeriğe geç</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="AniMap ana sayfa">
+        <img src="animap-logo.png" alt="" width="48" height="48">
+        <span>AniMap</span>
+      </a>
+
+      <nav class="site-nav" aria-label="Ana menü">
+        <a href="#features">Özellikler</a>
+        <a href="#audience">Kimler için?</a>
+        <a href="#contact">İletişim</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="container hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Hayvanlar için ortak yaşam platformu</p>
+        <h1 id="hero-title">AniMap</h1>
+        <p class="hero-subtitle">Hayvanlarla ilgili ihtiyaçları, toplulukları ve hizmetleri tek platformda bir araya getiren mobil uygulama.</p>
+        <p class="hero-description">AniMap; hayvan sahiplerini, hayvanseverleri, gönüllüleri ve hayvanlarla ilgili hizmet sağlayıcılarını bir araya getiren kapsamlı bir mobil platformdur. Uygulama; sosyal medya akışı, konum tabanlı harita özellikleri, sahiplendirme alanları, bilgi paylaşımı ve mini oyun deneyimi sunar.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#features">Özellikleri incele</a>
+          <a class="button button-secondary" href="#contact">İletişime geç</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="AniMap uygulama alanları">
+        <img class="hero-logo" src="animap-logo.png" alt="AniMap logosu">
+        <p class="motto">Dostlarımızın dili olabilmek için.</p>
+        <ul class="topic-list" aria-label="Uygulamanın temel alanları">
+          <li>Sosyal akış</li>
+          <li>Harita</li>
+          <li>Sahiplendirme</li>
+          <li>Hizmetler</li>
+          <li>Mini oyun</li>
+        </ul>
+      </aside>
+    </section>
+
+    <section class="section section-white" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Öne çıkan özellikler</p>
+          <h2 id="features-title">İhtiyaçtan topluluğa, tek bir uygulamada</h2>
+          <p>AniMap’in temel alanları hayvanlarla ilgili günlük ihtiyaçları, bilgi paylaşımını ve topluluk etkileşimini aynı deneyimde buluşturur.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">01</span>
+            <h3>Hayvan odaklı sosyal medya akışı</h3>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">02</span>
+            <h3>Konum tabanlı harita ve keşif alanı</h3>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">03</span>
+            <h3>Sahiplendirme ve topluluk özellikleri</h3>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">04</span>
+            <h3>Veteriner, pet shop, bakım ve konaklama hizmetlerinin keşfi</h3>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">05</span>
+            <h3>Kullanıcı iletişimi ve güvenlik odaklı yapı</h3>
+          </article>
+          <article class="feature-card">
+            <span class="feature-number" aria-hidden="true">06</span>
+            <h3>Uygulama içi mini oyun</h3>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="audience" aria-labelledby="audience-title">
+      <div class="container audience-layout">
+        <div class="audience-intro">
+          <p class="eyebrow">Hedef kitle</p>
+          <h2 id="audience-title">Hayvanlarla ilgilenen herkes için</h2>
+          <p>Farklı ihtiyaçlara ve katkı biçimlerine sahip kullanıcılar aynı topluluk yapısı içinde buluşabilir.</p>
+        </div>
+
+        <ul class="audience-list">
+          <li>Evcil hayvan sahipleri</li>
+          <li>Hayvanseverler</li>
+          <li>Gönüllüler</li>
+          <li>Veterinerler</li>
+          <li>Pet shoplar</li>
+          <li>Hayvan bakım ve konaklama hizmetleri</li>
+          <li>Hayvanlarla ilgili topluluklar ve kuruluşlar</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-white" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="contact-panel">
+          <div>
+            <h2 id="contact-title">İletişim</h2>
+            <p>AniMap ile ilgili destek ve bilgi talepleriniz için e-posta üzerinden iletişime geçebilirsiniz.</p>
+          </div>
+          <a class="contact-link" href="mailto:support@animapapp.com" aria-label="AniMap desteğe support@animapapp.com adresinden e-posta gönder">support@animapapp.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p class="footer-copy">© 2026 AniMap. Dostlarımızın dili olabilmek için.</p>
+      <nav class="footer-links" aria-label="Yasal ve iletişim bağlantıları">
+        <a href="privacy.html">Gizlilik Politikası</a>
+        <a href="terms.html">Kullanım Koşulları</a>
+        <a href="account-deletion.html">Hesap Silme</a>
+        <a href="mailto:support@animapapp.com">İletişim</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
